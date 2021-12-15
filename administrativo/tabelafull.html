@@ -1,0 +1,131 @@
+<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- bootstrap Lib -->
+
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/css/app-style.css" rel="stylesheet" />
+  <!-- datatable lib -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+</head>
+<style>
+
+body {
+  background-color: rgba(15, 80, 127);
+}
+/* Largura da barra de rolagem */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Fundo da barra de rolagem */
+::-webkit-scrollbar-track-piece {
+    background-color: #EEE;
+    border-left: 1px solid #CCC
+}
+
+/* Cor do indicador de rolagem */
+::-webkit-scrollbar-thumb:vertical,
+::-webkit-scrollbar-thumb:horizontal {
+    background-color: #BAC0C4
+}
+
+/* Cor do indicador de rolagem - ao passar o mouse */
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: #717171
+}
+table {
+  min-width: 100% !important;
+  position: relative !important;
+  background-color: rgba(15, 80, 127) !important;
+}
+
+table tbody tr{
+  background-color: rgba(15, 80, 127) !important;
+  color: white;
+}
+
+#background {
+background: url('../assets/images/bg-themes/1.png');
+}
+</style>
+
+<body>
+  <div id="background">
+
+    <table id="course_table" class="table table-sm">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>ide</th>
+          <th>terminal</th>
+          <th>modelo</th>
+          <th>ultima_venda</th>
+          <th>sonda</th>
+          <th>status</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+    </table>
+</body>
+
+</html>
+
+
+<script type="text/javascript" language="javascript">
+  $(document).ready(function () {
+    $('#add_button').click(function () {
+      $('#course_form')[0].reset();
+      $('.modal-title').text("Add Course Details");
+      $('#action').val("Add");
+      $('#operation').val("Add");
+    });
+
+    var dataTable = $('#course_table').DataTable({
+      "paging": true,
+      "processing": true,
+      "serverSide": true,
+      "order": [],
+      "info": true,
+      "ajax": {
+        url: "fetch.php",
+        type: "POST"
+      },
+      "columnDefs": [
+        {
+          "targets": [0, 3, 4],
+          "orderable": false,
+        },
+      ],
+    });
+
+
+    $(document).on('click', '.update', function () {
+      var course_id = $(this).attr("id");
+      $.ajax({
+        url: "fetch_single.php",
+        method: "POST",
+        data: { course_id: course_id },
+        dataType: "json",
+        success: function (data) {
+          $('#userModal').modal('show');
+          $('#id').val(data.id);
+          $('#course').val(data.course);
+          $('#students').val(data.students);
+          $('.modal-title').text("Edit Course Details");
+          $('#course_id').val(course_id);
+          $('#action').val("Save");
+          $('#operation').val("Edit");
+        }
+      })
+    });
+  });
+</script>
