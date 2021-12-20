@@ -1,0 +1,7 @@
+ul.pagination li a {
+  border-radius: 5px;
+}
+
+ul.pagination li a.active {
+  border-radius: 5px;
+}
