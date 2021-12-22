@@ -7,13 +7,13 @@ if($_SESSION['logado'] != 1){
     exit();
 }
 
-$sql = "SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(acaminho, ' ', 1), ' ', -1)  AS acaminho, id, ide, nivel, periferico, SUBSTRING(terminal, 6) as terminal, SUBSTRING(modelo, 5) as modelo, ultima_venda, SUBSTRING(sonda, 6) as sonda, SUBSTRING_INDEX(SUBSTRING_INDEX(criado, ' ', -1), ' ', 1) as criado, atendimento  
+$sql = "SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(acaminho, ' ', 1), ' ', -1)  AS acaminho, id, ide, nivel, periferico, SUBSTRING(terminal, 6) as terminal, SUBSTRING(modelo, 5) as modelo, ultima_venda, SUBSTRING(sonda, 6) as sonda, SUBSTRING_INDEX(SUBSTRING_INDEX(criado, ' ', -1), ' ', 1) as criado, atendimento 
                FROM metroatm 
                WHERE criado >= DATE_SUB(NOW(), INTERVAL 5 HOUR)
                AND atendimento IS null
-			   AND periferico IS null
+			   AND periferico LIKE '%aceitador%'
                AND modelo LIKE '%ATM%' 
-			   AND terminal LIKE '%Metr%'
+			   AND terminal LIKE '%Term%'
                ORDER BY id DESC";
                 
 $stm = $conexao->query($sql);
@@ -23,7 +23,7 @@ $result = $stm->fetchAll();
 
 //var_dump($result);
 
-echo '<table class="table table-hover">';
+echo '<table class="table table-sm">';
     echo '<tr>';
 		echo '<th><center><i class="zmdi zmdi-alert-polygon"></i></center></th>';
         echo '<th>Id</th>';

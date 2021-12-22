@@ -135,13 +135,35 @@ if ($_SESSION['logado'] != 1) {
 
         <!--Start Dashboard Content-->
 
-        <div class="row">
+		<div class="row">
           <div class="col-12 col-lg-12">
             <div class="card">
-              <div class="card-header">ATM - Terminal</div>
+              <div class="card-header">PRIORIDADE - Terminal</div>
               <div class="card-action">
                 <div class="table-responsive">
-                  <?php include_once "resuldatatmTerm.php" ?>
+                  <?php include_once "resuldatatm.php" ?>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  <div class="col-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">ACEITADOR - Terminal</div>
+              <div class="card-action">
+                <div class="table-responsive">
+                  <?php include_once "resultAceitador.php" ?>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  <div class="col-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">PINPAD - Terminal</div>
+              <div class="card-action">
+                <div class="table-responsive">
+                  <?php include_once "resultPinpad.php" ?>
                 </div>
               </div>
             </div>
@@ -152,7 +174,7 @@ if ($_SESSION['logado'] != 1) {
               <div class="card-header">VALIDADOR - Terminal</div>
               <div class="card-action">
                 <div class="table-responsive">
-                  <?php include_once "resultdatavalTerm.php" ?>
+                  <?php include_once "resultdataval.php" ?>
                 </div>
               </div>
             </div>

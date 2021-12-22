@@ -135,13 +135,35 @@ if ($_SESSION['logado'] != 1) {
           </div>
           </div>
       
-        <div class="row">
+		<div class="row">
           <div class="col-12 col-lg-12">
             <div class="card">
-              <div class="card-header">ATM - Metrô</div>
+              <div class="card-header">PRIORIDADE - Metrô</div>
               <div class="card-action">
                 <div class="table-responsive">
                   <?php include_once "resuldatatm.php" ?>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  <div class="col-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">ACEITADOR - Metrô</div>
+              <div class="card-action">
+                <div class="table-responsive">
+                  <?php include_once "resultAceitador.php" ?>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  <div class="col-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">PINPAD - Metrô</div>
+              <div class="card-action">
+                <div class="table-responsive">
+                  <?php include_once "resultPinpad.php" ?>
                 </div>
               </div>
             </div>

@@ -11,9 +11,9 @@ $sql = "SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(acaminho, ' ', 1), ' ', -1)  AS a
                FROM metroatm 
                WHERE criado >= DATE_SUB(NOW(), INTERVAL 5 HOUR)
                AND atendimento IS null
-			   AND periferico IS null
+			   AND periferico LIKE '%pinpad%'
                AND modelo LIKE '%ATM%' 
-			   AND terminal LIKE '%Metr%'
+			   AND terminal LIKE '%Term%'
                ORDER BY id DESC";
                 
 $stm = $conexao->query($sql);

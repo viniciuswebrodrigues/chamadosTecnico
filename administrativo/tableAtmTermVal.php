@@ -25,7 +25,7 @@ $result = $stm->fetchAll();
 echo '<table class="table table-sm">';
     echo '<tr>';
 		echo '<th><center><i class="zmdi zmdi-alert-polygon"></i></center></th>';
-        echo '<th>Id-Term</th>';
+        echo '<th>Id</th>';
         echo '<th>Nível</th>';
 		echo '<th>Técnico</th>';
         echo '<th>Terminal</th>';

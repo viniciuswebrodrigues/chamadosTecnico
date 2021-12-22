@@ -7,10 +7,11 @@ if($_SESSION['logado'] != 1){
     exit();
 }
 
-$sql = "SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(acaminho, ' ', 1), ' ', -1)  AS acaminho, id, ide, nivel, periferico, terminal, modelo, ultima_venda, sonda, criado, atendimento 
+$sql = "SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(acaminho, ' ', 1), ' ', -1)  AS acaminho, id, ide, nivel, periferico, SUBSTRING(terminal, 6) as terminal, SUBSTRING(modelo, 5) as modelo, ultima_venda, SUBSTRING(sonda, 6) as sonda, SUBSTRING_INDEX(SUBSTRING_INDEX(criado, ' ', -1), ' ', 1) as criado, atendimento  
                FROM metroatm 
                WHERE criado >= DATE_SUB(NOW(), INTERVAL 5 HOUR)
                AND atendimento IS null
+			   AND periferico IS null
                AND modelo LIKE '%ATM%' 
 			   AND terminal LIKE '%Term%'
                ORDER BY id DESC";
@@ -22,12 +23,11 @@ $result = $stm->fetchAll();
 
 //var_dump($result);
 
-echo '<table class="table table-sm">';
+echo '<table class="table table-hover">';
     echo '<tr>';
 		echo '<th><center><i class="zmdi zmdi-alert-polygon"></i></center></th>';
-        echo '<th>Id-Term</th>';
+        echo '<th>Id</th>';
         echo '<th>Nível</th>';
-		echo '<th>Periférico</th>';
 		echo '<th>Técnico</th>';
         echo '<th>Terminal</th>';
         echo '<th>Modelo</th>';
@@ -38,10 +38,9 @@ echo '<table class="table table-sm">';
 
 foreach($result as $stm) {
     echo '<tr>';
-		echo '<td <button type="button" class="btn btn-outline-warning btn-sm"></button>'."<a href='informeTerm.php?id=".$stm['id']."'>Informe</a>".'</td>';
+		echo '<td <button type="button" class="btn btn-outline-warning btn-sm"></button>'."<a href='informe.php?id=".$stm['id']."'>Informe</a>".'</td>';
         echo '<td>'.$stm['ide'].'</td>';
 		echo '<td>'.$stm['nivel'].'</td>';
-		echo '<td>'.$stm['periferico'].'</td>';
 		echo '<td>'.$stm['acaminho'].'</td>';
         echo '<td>'.$stm['terminal'].'</td>';
         echo '<td>'.$stm['modelo'].'</td>';

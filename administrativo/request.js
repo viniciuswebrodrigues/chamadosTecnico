@@ -81,3 +81,31 @@ function ajx(){
       ajax.send(); // envia a requisição
    }
    ajxvalPinpad();
+
+  function ajxvalAceitadorTerm(){
+      var ajax = new XMLHttpRequest(); // cria o objeto XHR
+      ajax.onreadystatechange = function(){
+         // verifica quando o Ajax for completado
+         if(ajax.readyState == 4 && ajax.status == 200){
+            document.getElementById("aceitadorTerm").innerHTML = ajax.responseText; // atualiza o span
+            setTimeout(ajxvalAceitadorTerm, 60000); // chama a função novamente após 2 segundos
+         }
+      }
+      ajax.open("GET", "tableAceitadorTerm.php"); // página a ser requisitada
+      ajax.send(); // envia a requisição
+   }
+   ajxvalAceitadorTerm();
+
+   function ajxvalPinpadTerm(){
+    var ajax = new XMLHttpRequest(); // cria o objeto XHR
+    ajax.onreadystatechange = function(){
+       // verifica quando o Ajax for completado
+       if(ajax.readyState == 4 && ajax.status == 200){
+          document.getElementById("pinpadTerm").innerHTML = ajax.responseText; // atualiza o span
+          setTimeout(ajxvalPinpadTerm, 60000); // chama a função novamente após 2 segundos
+       }
+    }
+    ajax.open("GET", "tablePinpadTerm.php"); // página a ser requisitada
+    ajax.send(); // envia a requisição
+ }
+ ajxvalPinpadTerm();
